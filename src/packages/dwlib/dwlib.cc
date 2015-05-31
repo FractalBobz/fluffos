@@ -1,3 +1,6 @@
+#include "base/package_api.h"
+#include "packages/core/add_action.h"
+/*
 #include "../base/std.h"
 
 #include "../lpc_incl.h"
@@ -16,7 +19,7 @@
 #include "../master.h"
 #include "../port.h"
 #include "../array.h"
-
+*/
 #ifdef F_QUERY_MULTIPLE_SHORT
 /* Hideous mangling of C code by Taffyd. */
 void query_multiple_short(svalue_t *arg, const char *type, int no_dollars, int quiet, int dark,
@@ -41,6 +44,9 @@ void query_multiple_short(svalue_t *arg, const char *type, int no_dollars, int q
   char *str, *res;
   object_t *ob;
   char *fun;
+
+  //mdw--old code dern't work, copying this from elsewhere.
+  auto max_string_length = CONFIG_INT(__MAX_STRING_LENGTH__);
 
   if (!size) {
     str = new_string(0, "f_query_multiple_short");
@@ -527,6 +533,7 @@ void f_reference_allowed() {
 #ifdef F_ADD_A
 
 void f_add_a() {
+  auto max_string_length = CONFIG_INT(__MAX_STRING_LENGTH__);
   const char *str = sp->u.string;
   char *ret;
   char *p;
@@ -660,6 +667,7 @@ void f_replace() {
 
 #if defined(F_REPLACE_MXP) || defined(F_REPLACE_HTML)
 void replace_mxp_html(int html, int mxp) {
+  auto max_string_length = CONFIG_INT(__MAX_STRING_LENGTH__);
   char *dst = new_string(max_string_length + 8, "f_replace_mxp_html: 2");
   const char *src = sp->u.string;
   char *dst2 = dst;
@@ -836,6 +844,7 @@ void f_replace_objects() { assign_svalue(sp, replace_objects(sp)); }
 
 #ifdef F_REPLACE_DOLLARS
 void f_replace_dollars() {
+  auto MAX_STRING_LENGTH = CONFIG_INT(__MAX_STRING_LENGTH__);
   char *newstr;
   const char *oldstr = (sp - 1)->u.string;
   char *currentnew;

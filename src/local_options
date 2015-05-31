@@ -64,7 +64,8 @@
 #endif
 
 #define PACKAGE_DEVELOP
-#undef PACKAGE_DWLIB
+/*#undef PACKAGE_DWLIB*/
+#define PACKAGE_DWLIB
 #define PACKAGE_EXTERNAL
 #define PACKAGE_MATH
 #undef PACKAGE_MATRIX
